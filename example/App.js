@@ -23,6 +23,7 @@ export default class App extends React.Component {
                     message={"Message for DialogInput #1"}
                     hintInput ={"HINT INPUT"}
                     submitInput={ (inputText) => {this.sendInput(inputText)} }
+                    advanceInput={ (inputText) => {this.sendInput(inputText)} }
                     closeDialog={ () => {this.showDialog(false)}}>
         </DialogInput>
         <TouchableOpacity onPress={()=>{this.showDialog(true)}} style={{padding:10}}>

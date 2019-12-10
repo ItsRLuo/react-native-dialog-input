@@ -23,8 +23,10 @@ class DialogInput extends React.Component{
     let dialogStyleProps = this.props.dialogStyle || {};
     var cancelText = this.props.cancelText || 'Cancel';
     var submitText = this.props.submitText || 'Submit';
+    var advanceText = this.props.submitText || 'Advance';
     cancelText = (Platform.OS === 'ios')? cancelText:cancelText.toUpperCase();
     submitText = (Platform.OS === 'ios')? submitText:submitText.toUpperCase();
+    advanceText = (Platform.OS === 'ios')? advanceText:advanceText.toUpperCase();
 
     return(
       <Modal
@@ -48,6 +50,7 @@ class DialogInput extends React.Component{
                   clearTextOnFocus={(textProps && textProps.clearTextOnFocus==true)?textProps.clearTextOnFocus:false}
                   keyboardType={(textProps && textProps.keyboardType)?textProps.keyboardType:'default'}
                   autoFocus={true}
+                  maxLength={20} // Cus
                   onKeyPress={() => this.setState({ openning: false })}
                   underlineColorAndroid='transparent'
                   placeholder={hintInput}
@@ -56,6 +59,14 @@ class DialogInput extends React.Component{
                   />
               </View>
               <View style={styles.btn_container}>
+                <TouchableOpacity  style={styles.touch_modal}
+                  onPress={() => {
+                    this.props.advanceDialog(value);
+                    this.setState({ inputModal: '',openning: true })
+                  }}>
+                  <Text style={styles.btn_modal_right}>{advanceText}</Text>
+                </TouchableOpacity>
+                <View style={styles.divider_btn}></View>
                 <TouchableOpacity style={styles.touch_modal}
                   onPress={() => {
                     this.props.closeDialog();
